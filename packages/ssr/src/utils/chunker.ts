@@ -17,7 +17,7 @@ export function createChunks(key: string, value: string, chunkSize?: number): Ch
 		return [{ name: key, value }];
 	}
 
-	const chunks = [];
+	const chunks: Chunk[] = [];
 
 	while (encodedValue.length > 0) {
 		let encodedChunkHead = encodedValue.slice(0, resolvedChunkSize);
@@ -56,7 +56,7 @@ export function createChunks(key: string, value: string, chunkSize?: number): Ch
 
 		chunks.push({
 			name: `${key}.${chunks.length}`, // チャンクのインデックスを使って一意の名前を生成
-			value: valueHead
+			value: valueHead as string,
 		  });
 		encodedValue = encodedValue.slice(encodedChunkHead.length);
 	}
