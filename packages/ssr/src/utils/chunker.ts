@@ -58,7 +58,10 @@ export function createChunks(key: string, value: string, chunkSize?: number): Ch
 		encodedValue = encodedValue.slice(encodedChunkHead.length);
 	}
 
-	return chunks.map((value, i) => ({ name: `${key}.${i}`, value }));
+	return chunks.map((value, i) => ({
+		name: `${key}.${i}`,
+		value: value as string
+	  }));
 }
 
 // Get fully constructed chunks
