@@ -54,13 +54,16 @@ export function createChunks(key: string, value: string, chunkSize?: number): Ch
 			}
 		}
 
-		chunks.push(valueHead);
+		chunks.push({
+			name: `${key}.${chunks.length}`, // チャンクのインデックスを使って一意の名前を生成
+			value: valueHead
+		  });
 		encodedValue = encodedValue.slice(encodedChunkHead.length);
 	}
 
 	return chunks.map((value, i) => ({
 		name: `${key}.${i}`,
-		value: value as string
+		value: value.value as string,
 	  }));
 }
 

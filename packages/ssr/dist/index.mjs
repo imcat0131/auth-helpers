@@ -44,12 +44,16 @@ function createChunks(key, value, chunkSize) {
         }
       }
     }
-    chunks.push(valueHead);
+    chunks.push({
+      name: `${key}.${chunks.length}`,
+      // チャンクのインデックスを使って一意の名前を生成
+      value: valueHead
+    });
     encodedValue = encodedValue.slice(encodedChunkHead.length);
   }
   return chunks.map((value2, i) => ({
     name: `${key}.${i}`,
-    value: value2
+    value: value2.value
   }));
 }
 async function combineChunks(key, retrieveChunk) {
